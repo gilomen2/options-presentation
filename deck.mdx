@@ -138,10 +138,6 @@ We're giving it an initial state that represents anything that is selected by de
 ```jsx 3 24 file=./examples/App.js
 ```
 
-```jsx 4 27:39 file=./examples/App.js
-```
-
-
 </CodeSurfer>
 
 <Notes>
@@ -156,8 +152,18 @@ Then we're going to create a new array from the currentSelections with the chang
 !!NEXT!!
 
 Finally, we'll update the state to replace the new selections.
+</Notes>
 
-!!NEXT!!
+---
+
+<CodeSurfer>
+
+```jsx 4 27:39 file=./examples/App.js
+```
+
+</CodeSurfer>
+
+<Notes>
 
 Now let's look at the render.
 
@@ -274,7 +280,17 @@ The handleSetSelections function from our MenuItem component. It will take in th
 </CodeSurfer>
 
 <Notes>
-Nested option groups
+
+So, that takes care of selecting or deselecting a top-level option, but we still have render and handle selecting nest option groups, and this is where we get into some recursion.
+
+!!NEXT!!
+
+For each option in our optionGroup, if the option is selected, we want to display it's nested option groups. We do that by rendering the OptionGroup component from the render method of the OptionGroup component, hence the recursion.
+
+For anyone whose not familiar with the term, recursion is the process a procedure goes through when one of the steps of the procedure involves invoking the procedure itself.
+
+!!NEXT!!
+
 Looks like we're going to get into an infinite loop by passing a function execution to the onChange prop, but actually, this is an example of using the functional programming concept of partial application
 </Notes>
 
