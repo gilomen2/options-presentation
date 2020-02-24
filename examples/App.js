@@ -62,10 +62,10 @@ const OptionGroup = ({ optionGroup, currentOptionGroupSelections, onChange }) =>
     onChange(newOptionGroup)
   }
 
-  const createNewParentSelections = (optionId, parentOptionSelections) => changedOptionGroup => {
+  const createNewParentSelections = (parentOptionId, parentOptionSelections) => changedOptionGroup => {
     const newParentOptionSelections = parentOptionSelections.map(opt => {
       const newOpt = { ...opt }
-      if (newOpt.id === optionId) {
+      if (newOpt.id === parentOptionId) {
         newOpt.option_groups = newOpt.option_groups.map(og => {
           let newOptionGroup = { ...og }
           if (newOptionGroup.id === changedOptionGroup.id) {

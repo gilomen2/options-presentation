@@ -291,8 +291,14 @@ For anyone whose not familiar with the term, recursion is the process a procedur
 
 !!NEXT!!
 
-Looks like we're going to get into an infinite loop by passing a function execution to the onChange prop, but actually, this is an example of using the functional programming concept of partial application
+The major change between the top-level OptionGroup and the nested instance is our onchange prop. We're going to pass in a different function here called createNewParentSelections. And, for anyone familiar with React, it looks like we're going to get into an infinite loop by passing a function execution to the onChange prop, but actually, this is an example of using the functional programming concept of partial application.
 </Notes>
+
+---
+
+> Partial application can be described as taking a function that accepts some number of arguments, binding values to one or more of those arguments, and returning a new function that only accepts the remaining, un-bound arguments.
+
+*- [Ben Alman](http://benalman.com/news/2012/09/partial-application-in-javascript/)*
 
 ---
 
@@ -304,10 +310,21 @@ Looks like we're going to get into an infinite loop by passing a function execut
 ```jsx 2 65 file=./examples/App.js
 ```
 
+```jsx 1 65:84 file=./examples/App.js
+```
+
 </CodeSurfer>
 
 <Notes>
 
+So let's look at how we're using partial application to bind values to the function that we passed to our onChange handler.
+
 !!NEXT!!
+
+Using the fat arrow syntax, we define a function that takes in parentOptionId and parentOptionSelections, and returns a new function that already has these values bound to it. The new function, when executed by the onChange function in our component, will only take in the changedOptionGroup.
+
+!!NEXT!!
+
+So why do we need this nested handler if we already wrote one?
 
 </Notes>
