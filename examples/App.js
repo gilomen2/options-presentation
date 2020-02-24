@@ -103,7 +103,7 @@ const OptionGroup = ({ optionGroup, currentOptionGroupSelections, onChange }) =>
               </div>
 
               <div>
-                {option.option_groups.map(nestedOptionGroup => {
+                {isSelected && option.option_groups.map(nestedOptionGroup => {
                   const selOpts = currentOptionGroupSelectedOptions.find(sel => sel.id === option.id)
                   return (
                     <OptionGroup

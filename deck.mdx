@@ -257,3 +257,41 @@ Then, we call the onChange prop and pass in our newSelections. In the case of th
 
 The handleSetSelections function from our MenuItem component. It will take in the newSelections for the optionGroup and replace that option group in our selections state.
 </Notes>
+
+---
+
+<CodeSurfer>
+
+```jsx 1 87:122 file=./examples/App.js
+```
+
+```jsx 2 106:115 file=./examples/App.js
+```
+
+```jsx 3 113 file=./examples/App.js
+```
+
+</CodeSurfer>
+
+<Notes>
+Nested option groups
+Looks like we're going to get into an infinite loop by passing a function execution to the onChange prop, but actually, this is an example of using the functional programming concept of partial application
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```jsx 1 65:84 file=./examples/App.js
+```
+
+```jsx 2 65 file=./examples/App.js
+```
+
+</CodeSurfer>
+
+<Notes>
+
+!!NEXT!!
+
+</Notes>
