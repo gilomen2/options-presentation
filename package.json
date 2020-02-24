@@ -5,19 +5,19 @@
   "scripts": {
     "start": "mdx-deck deck.mdx",
     "build": "mdx-deck build deck.mdx",
+    "postbuild": "cpx static/* public/static",
     "pdf": "mdx-deck pdf deck.mdx",
     "image": "mdx-deck screenshot deck.mdx",
-    "help": "mdx-deck",
-    "prepublish-deck": "npm run build",
-    "publish-deck": "gh-pages -d public"
+    "help": "mdx-deck"
   },
   "keywords": [],
   "author": "Grzegorz Rozdzialik",
   "license": "MIT",
   "dependencies": {
+    "code-surfer": "^3.1.0",
+    "cpx": "^1.5.0",
     "mdx-deck": "3.0.13",
-    "raw-loader": "^2.0.0",
-    "code-surfer": "^3.1.0"
+    "raw-loader": "^2.0.0"
   },
   "devDependencies": {
     "@types/react": "^16.8.15",
