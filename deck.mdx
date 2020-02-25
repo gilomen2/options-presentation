@@ -13,8 +13,6 @@ export const theme = oceanicNext
 
 ---
 
-## What are we doing?
-
 <CodeSurferColumns>
 
 <Step>
@@ -43,8 +41,6 @@ So, how are we doing that?
 
 ## Creating Infinitely Nested Option Select Lists with React
 
-<Image src='/static/options-list.png' style={{ width: '67%', backgroundSize: 'contain' }}></Image>
-
 ---
 
 <CodeSurfer>
@@ -69,6 +65,27 @@ Recursive structure of a menu item.
 An item has an id and name and an array of option groups. Each option group is an object that has an array of options. These are the options that are actually selectable.
 
 Options can also have their own option groups, and so on.
+</Notes>
+
+---
+
+<CodeSurferColumns>
+
+<Step>
+
+<Image src='/static/labeled.png' style={{ width: '67%', backgroundSize: 'contain' }}></Image>
+
+```jsx file=./examples/exampleItemBurrito
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+<Notes>
+
+So here's what that looks like in practice
+
 </Notes>
 
 ---
