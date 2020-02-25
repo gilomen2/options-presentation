@@ -60,9 +60,22 @@ So, how are we doing that?
 </CodeSurfer>
 
 <Notes>
-Recursive structure of a menu item.
 
-An item has an id and name and an array of option groups. Each option group is an object that has an array of options. These are the options that are actually selectable.
+So from some background, we call a list of all the items you can order from a restaurant or establishment a menu and we call each item in that menu a menu item. So at Chipotle, for example, a menu item is a burrito, or tacos, or a burrito bowl.
+
+What we're going to be focusing on is how to customize a menu item.
+
+So this is the menu item structure we're going to be using.
+
+!!NEXT!!
+
+An item has an id and name and an array of option groups.
+
+!!NEXT!!
+
+Each option group is an object that has an array of options. These are the options that are actually selectable.
+
+!!NEXT!!
 
 Options can also have their own option groups, and so on.
 </Notes>
@@ -354,7 +367,7 @@ For anyone whose not familiar with the term, recursion is the process a procedur
 
 The major change between the top-level OptionGroup and the nested instance is our onchange prop. When I first started working on this, I underestimated the problem. I thought "I'll just render OptionGroups within OptionGroups and I can pass the same onChange prop down through." After some frustration of "why isn't this working" it dawned on me: the top-level option group doesn't have any parents so it only needs to know how to change it's own data. But all the nested option groups have to have context of their parent in order to pass their changes up through the chain. So, how do we make sure that option groups have references to their parents?
 
-We're going to pass in a different function here called createNewParentSelections. And, for anyone familiar with React, it may look like we're going to get into trouble here by passing a function execution instead of a function reference to the onChange prop, but actually, this is an example of using the functional programming concept of partial application.
+We're going to pass in a different function here called createNewParentSelections. And, for anyone familiar with React, it may look like we're going to get into trouble here by passing a function invocation instead of a function reference to the onChange prop, but actually, this is an example of using the functional programming concept of partial application.
 
 </Notes>
 
@@ -389,7 +402,7 @@ Using the fat arrow syntax, we define a function that takes in parentOptionId an
 
 !!NEXT!!
 
-So why do we need this nested handler if we already wrote one? The other handler will still be used as the first step in every execution of the OptionGroup component's onChange prop, but it will only mutate the optionGroup's data. We also need a way for each nested option group to mutate its containing parent option group, then pass that up to the MenuItem component where our whole item's state is stored.
+So why do we need this nested handler if we already wrote one? The createNewOptionGroupSelections handler above will still be used as the first step in every invocation of the OptionGroup component's onChange prop, but it will only mutate the optionGroup's data. We also need a way for each nested option group to mutate its containing parent option group, then pass that up to it's parent, and so on, until we finally get to the handler from the MenuItem component where our whole item's state is stored.
 
 </Notes>
 
