@@ -281,7 +281,7 @@ The handleSetSelections function from our MenuItem component. It will take in th
 
 <Notes>
 
-So, that takes care of selecting or deselecting a top-level option, but we still have render and handle selecting nest option groups, and this is where we get into some recursion.
+So, that takes care of selecting or deselecting a top-level option, but we still have render and handle selecting nested option groups, and this is where we get into some recursion.
 
 !!NEXT!!
 
@@ -291,7 +291,7 @@ For anyone whose not familiar with the term, recursion is the process a procedur
 
 !!NEXT!!
 
-The major change between the top-level OptionGroup and the nested instance is our onchange prop. We're going to pass in a different function here called createNewParentSelections. And, for anyone familiar with React, it looks like we're going to get into an infinite loop by passing a function execution to the onChange prop, but actually, this is an example of using the functional programming concept of partial application.
+The major change between the top-level OptionGroup and the nested instance is our onchange prop. We're going to pass in a different function here called createNewParentSelections. And, for anyone familiar with React, it may look like we're going to get into trouble here by passing a function execution instead of a function reference to the onChange prop, but actually, this is an example of using the functional programming concept of partial application.
 </Notes>
 
 ---
@@ -321,10 +321,36 @@ So let's look at how we're using partial application to bind values to the funct
 
 !!NEXT!!
 
-Using the fat arrow syntax, we define a function that takes in parentOptionId and parentOptionSelections, and returns a new function that already has these values bound to it. The new function, when executed by the onChange function in our component, will only take in the changedOptionGroup.
+Using the fat arrow syntax, we define a function that takes in parentOptionId and parentOptionSelections, and returns a new function that already has these values bound to it. The new function, when executed by the onChange function in our component, will only take in the changedOptionGroup. We do this because when this returned function is executed, we wouldn't have the context we need of the parent option. I'll demostrate what I mean by that when we get into the demo.
 
 !!NEXT!!
 
-So why do we need this nested handler if we already wrote one?
+So why do we need this nested handler if we already wrote one? The other handler will still be used as the first step in every execution of the OptionGroup component's onChange prop, but it will only mutate the optionGroup's data. We also need a way for each nested option group to mutate its containing parent option group, then pass that up to the MenuItem component where our whole item's state is stored.
+
+</Notes>
+
+---
+
+### Evaluating Other Approaches
+
+<Notes>
+
+Another approach we could have taken was instead of keeping a separate state of the selections, we could have added a boolean property to every option in the original menu_item structure that says whether or not the option is selected. That's a valid solution, but one disadvantage to doing that is that we'll we using this data to display all the selected options for the item in a user's cart, so we would have to map over alot more properties to do that. Also, we will untimately only be sending selected options in our request to the backend to ask the favor. Storing just the selections upfront allows us to prevent having to get our data into the proper structure down the line.
+
+Another issue this approach attempts to handle is that React can have performance issues with large sets of data. Because of how configurable the menus can be, the menus themselves can be huge JSON. This allows us to only have to make changes to a smaller object.
+
+</Notes>
+
+---
+
+# Check Out The Repos
+
+### [https://github.com/gilomen2/options-all-the-way](https://github.com/gilomen2/options-all-the-way)
+
+### [https://github.com/gilomen2/options-presentation](https://github.com/gilomen2/options-presentation)
+
+<Notes>
+
+Shoutout to mdx-deck and code-surfer, which made the
 
 </Notes>
