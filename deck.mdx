@@ -75,7 +75,7 @@ Options can also have their own option groups, and so on.
 
 <Image src='/static/labeled.png' style={{ width: '67%', backgroundSize: 'contain' }}></Image>
 
-```jsx file=./examples/exampleItemBurrito
+```json 1:36 file=./examples/exampleItemBurrito.json
 ```
 
 </Step>
@@ -98,7 +98,31 @@ So here's what that looks like in practice
 ```jsx 2 13:39 file=./examples/App.js title="Set Up Our Menu"
 ```
 
-```jsx 3 14 file=./examples/App.js title="Set Up Our Menu"
+```jsx 3 41:123 file=./examples/App.js title="Set Up Our Menu"
+```
+
+```jsx 4 94:103 file=./examples/App.js title="Set Up Our Menu"
+```
+
+</CodeSurfer>
+
+<Notes>
+
+Now let's look at how we're rendering this menu in React
+
+</Notes>
+
+---
+
+<CodeSurfer>
+
+```jsx 1 1:11 file=./examples/App.js title="<App />"
+```
+
+```jsx 2 13:39 file=./examples/App.js title="<MenuItem />"
+```
+
+```jsx 3 14 file=./examples/App.js title="<MenuItem />"
 ```
 
 </CodeSurfer>
@@ -122,20 +146,20 @@ We're creating a state variable called "currentSelections" which will represent 
 
 <Step>
 
-```jsx 14 file=./examples/App.js
+```jsx 14 file=./examples/App.js title="<MenuItem />"
 ```
 
-```json 1:11 file=./examples/exampleItemPizza.json
+```json 1:11 file=./examples/exampleItemPizza.json title="Menu Item JSON"
 ```
 
 </Step>
 
 <Step>
 
-```jsx 1 14 file=./examples/App.js
+```jsx 1 14 file=./examples/App.js title="<MenuItem />"
 ```
 
-```json
+```json title="<MenuItem /> currentSelections state"
 [
   {
     "id": "d317a2a8-b294-48ab-8a04-140cea3a04c4",
@@ -158,13 +182,13 @@ We're giving it an initial state that represents anything that is selected by de
 
 <CodeSurfer>
 
-```jsx 1 16:25 file=./examples/App.js
+```jsx 1 16:25 file=./examples/App.js title="<MenuItem />"
 ```
 
-```jsx 2 17:22 file=./examples/App.js
+```jsx 2 17:22 file=./examples/App.js title="<MenuItem />"
 ```
 
-```jsx 3 24 file=./examples/App.js
+```jsx 3 24 file=./examples/App.js title="<MenuItem />"
 ```
 
 </CodeSurfer>
@@ -187,7 +211,7 @@ Finally, we'll update the state to replace the new selections.
 
 <CodeSurfer>
 
-```jsx 4 27:39 file=./examples/App.js
+```jsx 4 27:39 file=./examples/App.js title="<MenuItem />"
 ```
 
 </CodeSurfer>
@@ -208,19 +232,19 @@ And then we're passing in our handler as an onChange prop.
 
 <CodeSurfer>
 
-```jsx 1 41:124 file=./examples/App.js
+```jsx 1 41:124 file=./examples/App.js title="<OptionGroup />"
 ```
 
-```jsx 2 87:123 file=./examples/App.js
+```jsx 2 87:123 file=./examples/App.js title="<OptionGroup />"
 ```
 
-```jsx 3 90 file=./examples/App.js
+```jsx 3 90 file=./examples/App.js title="<OptionGroup />"
 ```
 
-```jsx 4 95:101 file=./examples/App.js
+```jsx 4 95:101 file=./examples/App.js title="<OptionGroup /> rendering an Option"
 ```
 
-```jsx 5 100 file=./examples/App.js
+```jsx 5 100 file=./examples/App.js title="<OptionGroup /> rendering an Option"
 ```
 
 </CodeSurfer>
@@ -249,22 +273,22 @@ And for the input's onChange prop, we're going to pass in an anonymous function 
 
 <CodeSurfer>
 
-```jsx 1 48:64 file=./examples/App.js
+```jsx 1 48:64 file=./examples/App.js title="Option onChange handler"
 ```
 
-```jsx 2 49:51 file=./examples/App.js
+```jsx 2 49:51 file=./examples/App.js title="Option onChange handler"
 ```
 
-```jsx 3 52:54 file=./examples/App.js
+```jsx 3 52:54 file=./examples/App.js title="Option onChange handler"
 ```
 
-```jsx 4 56:60 file=./examples/App.js
+```jsx 4 56:60 file=./examples/App.js title="Option onChange handler"
 ```
 
-```jsx 5 62 file=./examples/App.js
+```jsx 5 62 file=./examples/App.js title="Option onChange handler"
 ```
 
-```jsx 6 16:25 file=./examples/App.js
+```jsx 6 16:25 file=./examples/App.js title="<MenuItem /> onChange handler passed to <OptionGroup />"
 ```
 
 </CodeSurfer>
@@ -297,13 +321,10 @@ The handleSetSelections function from our MenuItem component. It will take in th
 
 <CodeSurfer>
 
-```jsx 1 87:122 file=./examples/App.js
+```jsx 1 87:122 file=./examples/App.js title="<OptionGroup />"
 ```
 
-```jsx 2 106:115 file=./examples/App.js
-```
-
-```jsx 3 113 file=./examples/App.js
+```jsx 2 106:115 file=./examples/App.js title="<OptionGroup /> recursively rendering <OptionGroup />"
 ```
 
 </CodeSurfer>
@@ -318,9 +339,23 @@ For each option in our optionGroup, if the option is selected, we want to displa
 
 For anyone whose not familiar with the term, recursion is the process a procedure goes through when one of the steps of the procedure involves invoking the procedure itself.
 
-!!NEXT!!
+</Notes>
 
-The major change between the top-level OptionGroup and the nested instance is our onchange prop. We're going to pass in a different function here called createNewParentSelections. And, for anyone familiar with React, it may look like we're going to get into trouble here by passing a function execution instead of a function reference to the onChange prop, but actually, this is an example of using the functional programming concept of partial application.
+---
+
+<CodeSurfer>
+
+```jsx 113 file=./examples/App.js title="The Magic"
+```
+
+</CodeSurfer>
+
+<Notes>
+
+The major change between the top-level OptionGroup and the nested instance is our onchange prop. When I first started working on this, I underestimated the problem. I thought "I'll just render OptionGroups within OptionGroups and I can pass the same onChange prop down through." After some frustration of "why isn't this working" it dawned on me: the top-level option group doesn't have any parents so it only needs to know how to change it's own data. But all the nested option groups have to have context of their parent in order to pass their changes up through the chain. So, how do we make sure that option groups have references to their parents?
+
+We're going to pass in a different function here called createNewParentSelections. And, for anyone familiar with React, it may look like we're going to get into trouble here by passing a function execution instead of a function reference to the onChange prop, but actually, this is an example of using the functional programming concept of partial application.
+
 </Notes>
 
 ---
