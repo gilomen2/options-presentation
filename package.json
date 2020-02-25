@@ -5,7 +5,7 @@
   "scripts": {
     "start": "mdx-deck deck.mdx",
     "build": "mdx-deck build deck.mdx",
-    "postbuild": "cpx static/* public/static",
+    "postbuild": "cpx 'static/*' 'public/static'",
     "pdf": "mdx-deck pdf deck.mdx",
     "image": "mdx-deck screenshot deck.mdx",
     "help": "mdx-deck"
